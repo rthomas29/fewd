@@ -33,13 +33,15 @@ router.get('/search/:category', (req, res, next) => {
   const query = `query getFood($category: String!) {
     search(term: $category
             location: "Miami, Florida",
-            limit: 10
-            open_now: true) {
+            limit: 20,
+            open_now: true,
+            price: "1, 2") {
         total
         business {
             name
             url
             phone
+            price
         }
     }
 }`;
