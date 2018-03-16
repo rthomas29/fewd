@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Form, InputGroupText } from 'reactstrap';
-import { GraphQLClient, request } from 'graphql-request';
-import FormComponent from './components/Form';
+import FormComponent from './components/FormComponent';
 import FoodGallery from './components/FoodGallery';
 import Categories from './components/Categories';
-
 import './App.css';
 
-class App extends Component {
+export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      res: '',
-      term: 'bars',
+      term: '',
       foodPlaces: [],
     };
     this.sendCategory = this.sendCategory.bind(this);
@@ -30,25 +26,14 @@ class App extends Component {
     e.preventDefault();
     this.setState({ term: e.target.value });
   };
-  async componentDidMount() {
-    await axios
-      .get('/search')
-      .then(res => this.setState({ res: res.data.business }))
-      .catch(err => console.log(err));
-  }
   render() {
     return (
       <div className="App">
         <h1>Fewd</h1>
         <Categories setTerm={this.setTerm} />
-        <form onSubmit={this.sendCategory}>
-          <input type="submit" onClick={this.sendCategory} value="Click for food" />
-        </form>
+        <FormComponent sendCategory={this.sendCategory} />
         <FoodGallery {...this.state} />
-        <FormComponent data={this.state.res} />
       </div>
     );
   }
 }
-
-export default App;
