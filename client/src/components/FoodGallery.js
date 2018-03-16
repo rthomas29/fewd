@@ -6,7 +6,15 @@ const FoodGallery = (props) => {
   const { foodPlaces } = props;
 
   return (
-    <ListGroup>{foodPlaces.map(place => <ListGroupItem>{place.name}</ListGroupItem>)}</ListGroup>
+    <ListGroup>
+      {foodPlaces.map(place => (
+        <ListGroupItem>
+          <h2>{place.name}</h2>
+          <h3>{place.phone}</h3>
+          <h3>{place.url}</h3>
+        </ListGroupItem>
+      ))}
+    </ListGroup>
   );
 };
 

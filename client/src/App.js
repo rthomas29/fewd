@@ -4,6 +4,8 @@ import { Button, Form, InputGroupText } from 'reactstrap';
 import { GraphQLClient, request } from 'graphql-request';
 import FormComponent from './components/Form';
 import FoodGallery from './components/FoodGallery';
+import Categories from './components/Categories';
+
 import './App.css';
 
 class App extends Component {
@@ -38,12 +40,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Fewd</h1>
-        <Button value="Greek" onClick={this.setTerm}>
-          Greek
-        </Button>
-        <Button value="Barbecue" onClick={this.setTerm}>
-          Barbecue
-        </Button>
+        <Categories setTerm={this.setTerm} />
         <form onSubmit={this.sendCategory}>
           <input type="submit" onClick={this.sendCategory} value="Click for food" />
         </form>
