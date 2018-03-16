@@ -3,7 +3,8 @@ const router = express.Router();
 const axios = require('axios');
 const dotenv = require('dotenv');
 const { request, GraphQLClient } = require('graphql-request');
-
+const parseJSON = require('../readFile');
+// parseJSON will return an array of categories..need to send to client, update state, then render list of categories
 const client = new GraphQLClient('https://api.yelp.com/v3/graphql', {
   headers: {
     Authorization:
