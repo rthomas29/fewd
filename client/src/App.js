@@ -27,12 +27,21 @@ export default class App extends Component {
     this.setState({ term: e.target.value });
   };
   render() {
+    if (this.state.foodPlaces.length > 0) {
+      return (
+        <div className="App">
+          <h1>Fewd</h1>
+          <Categories setTerm={this.setTerm} />
+          <FormComponent sendCategory={this.sendCategory} />
+          <FoodGallery {...this.state} />
+        </div>
+      );
+    }
     return (
       <div className="App">
         <h1>Fewd</h1>
         <Categories setTerm={this.setTerm} />
         <FormComponent sendCategory={this.sendCategory} />
-        <FoodGallery {...this.state} />
       </div>
     );
   }
