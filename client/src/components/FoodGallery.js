@@ -1,20 +1,28 @@
 import React from 'react';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardText, Container, Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 const FoodGallery = (props) => {
   const { foodPlaces } = props;
 
   return (
-    <ListGroup>
+    <Container>
       {foodPlaces.map(place => (
-        <ListGroupItem>
-          <h2>{place.name}</h2>
-          <h3>{place.phone}</h3>
-          <h3>{place.url}</h3>
-        </ListGroupItem>
+        <Row>
+          <Col>
+            <Card>
+              <CardBody>
+                <CardTitle>
+                  <a href={place.url}>{place.name}</a>
+                </CardTitle>
+                <CardText>{place.phone}</CardText>
+                <CardText>{place.price}</CardText>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
       ))}
-    </ListGroup>
+    </Container>
   );
 };
 
