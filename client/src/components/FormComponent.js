@@ -5,7 +5,7 @@ const FormComponent = (props) => {
   const { sendCategory } = props;
   return (
     <Form onSubmit={sendCategory}>
-      <input type="submit" onClick={sendCategory} value="Click for food" />
+      <input className="btn btn-primary" type="submit" onClick={sendCategory} value="Click for food" />
     </Form>
   );
 };
