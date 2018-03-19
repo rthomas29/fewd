@@ -26,15 +26,29 @@ export default class App extends Component {
     this.setState({ term: e.target.value });
   };
   componentDidMount() {
-    axios
-      .get('/api')
-      .then(res => this.setState({ categories: res.data }))
-      .catch(err => console.log(err));
+    const getCategoriesFromApi = () => axios.get('/api');
+    const getLocation = () => axios.get('http://ipinfo.io/');
+
+    axios.all([getCategoriesFromApi(), getLocation()]).then(
+      axios.spread((categories, ip) => {
+        const locArray = ip.data.loc.split(',');
+        this.setState({
+          categories,
+        });
+        this.lat = locArray[0];
+        this.lon = locArray[1];
+      }),
+    );
   }
   render() {
     return (
       <div className="App">
-        <Fewd foodPlaces={this.state.foodPlaces} setTerm={this.setTerm} sendCategory={this.sendCategory} />
+        <Fewd
+          foodPlaces={this.state.foodPlaces}
+          setTerm={this.setTerm}
+          sendCategory={this.sendCategory}
+          {...this.state}
+        />
       </div>
     );
   }
