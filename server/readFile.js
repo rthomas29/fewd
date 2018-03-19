@@ -1,19 +1,19 @@
 const fs = require('fs');
 
-const parseJSON = () => {
-  const categoryData = fs.readFile('./assets/categories.json', 'utf-8', (err, data) => {
+const populateCategories = (req, res) => {
+  let categoriesArray = [];
+  fs.readFile('./assets/categories.json', 'utf-8', (err, data) => {
     if (err) throw err;
-    const foodCategories = [];
     const categories = JSON.parse(data);
-    categories.map(category => {
+    categories.forEach(category => {
       Object.keys(category).forEach(key => {
         if (key === 'parents' && category[key][0] === 'food') {
-          foodCategories.push(category.title);
+          categoriesArray.push(category.title);
         }
       });
     });
-    return foodCategories;
+    res.send(categoriesArray);
   });
 };
 
-module.exports = parseJSON;
+module.exports = populateCategories;

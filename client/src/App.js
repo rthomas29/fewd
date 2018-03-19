@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Fewd from './components/Fewd';
-import FormComponent from './components/FormComponent';
-import FoodGallery from './components/FoodGallery';
-import Categories from './components/Categories';
 import './App.css';
 
 export default class App extends Component {
