@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Fewd from './components/Fewd';
 import FormComponent from './components/FormComponent';
 import FoodGallery from './components/FoodGallery';
 import Categories from './components/Categories';
@@ -11,6 +12,7 @@ export default class App extends Component {
     this.state = {
       term: '',
       foodPlaces: [],
+      categories: [],
     };
     this.sendCategory = this.sendCategory.bind(this);
     this.setTerm = this.setTerm.bind(this);
@@ -18,7 +20,7 @@ export default class App extends Component {
   sendCategory = e => {
     e.preventDefault();
     axios
-      .get(`search/${this.state.term}`)
+      .get(`api/${this.state.term}`)
       .then(res => this.setState({ foodPlaces: res.data }))
       .catch(err => console.log(err));
   };
@@ -26,22 +28,16 @@ export default class App extends Component {
     e.preventDefault();
     this.setState({ term: e.target.value });
   };
+  componentDidMount() {
+    axios
+      .get('/api')
+      .then(res => this.setState({ categories: res.data }))
+      .catch(err => console.log(err));
+  }
   render() {
-    if (this.state.foodPlaces.length > 0) {
-      return (
-        <div className="App">
-          <h1>Fewd</h1>
-          <Categories setTerm={this.setTerm} />
-          <FormComponent sendCategory={this.sendCategory} />
-          <FoodGallery {...this.state} />
-        </div>
-      );
-    }
     return (
       <div className="App">
-        <h1>Fewd</h1>
-        <Categories setTerm={this.setTerm} />
-        <FormComponent sendCategory={this.sendCategory} />
+        <Fewd foodPlaces={this.state.foodPlaces} setTerm={this.setTerm} sendCategory={this.sendCategory} />
       </div>
     );
   }
