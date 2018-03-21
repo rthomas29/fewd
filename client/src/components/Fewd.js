@@ -21,7 +21,6 @@ const Fewd = (props) => {
         <Jumbotron style={style}>
           <h1>Fewd</h1>
           <small>Don't think. Just eat.</small>
-          <Categories setTerm={props.setTerm} />
           <FormComponent sendCategory={props.sendCategory} />
           <FoodGallery foodPlaces={props.foodPlaces} />
         </Jumbotron>
@@ -33,7 +32,6 @@ const Fewd = (props) => {
       <Jumbotron style={style}>
         <h1>Fewd</h1>
         <small>Don't think. Just eat.</small>
-        <Categories setTerm={props.setTerm} />
         <FormComponent sendCategory={props.sendCategory} />
       </Jumbotron>
     </div>

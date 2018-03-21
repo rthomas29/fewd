@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const dotenv = require('dotenv');
 const { request, GraphQLClient } = require('graphql-request');
 const populateCategories = require('../readFile');
+require('dotenv').config();
 
 // populateCategegories will return an array of categories..need to send to client, update state, then render list of categories
 const client = new GraphQLClient('https://api.yelp.com/v3/graphql', {
   headers: {
-    Authorization:
-      'Bearer 8a_Em0g0bSIOuAXkQ-VtcDV6f0Z5DyvAKPDhJU1W9lQ4HOC-GQOuYpAGG4Wu203pcGUnkM-PAaGhlKwpZxAsA227jTa0eTY-ElO49jt3mY4amGWNXTG3dSF45qipWnYx',
+    Authorization: `Bearer ${process.env.YELP_KEY}`,
   },
 });
+
 router.get('/api', (req, res, next) => {
   populateCategories(req, res);
 });
